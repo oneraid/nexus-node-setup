@@ -15,7 +15,7 @@ else
 fi
 
 echo "=== 🧱 Building Docker image for Nexus Node ==="
-git clone https://github.com/username/nexus-node-setup.git /tmp/nexus-node-setup
+git clone https://github.com/oneraid/nexus-node-setup.git /tmp/nexus-node-setup
 cd /tmp/nexus-node-setup
 
 docker build -t nexus-node .
