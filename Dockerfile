@@ -1,15 +1,21 @@
 FROM ubuntu:22.04
 
-ENV DEBIAN_FRONTEND=noninteractive
-
+# Update dan install dependencies
 RUN apt-get update && apt-get install -y \
     curl \
     wget \
-    bash \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl https://cli.nexus.xyz/ | sh
-ENV PATH="/root/.nexus/bin:${PATH}"
+# Set working directory
+WORKDIR /root
 
-CMD ["nexus-network", "start", "--node-id", "37274387"]
+# Download dan install Nexus CLI
+RUN curl https://cli.nexus.xyz/ | sh
+
+# Copy entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Set entrypoint
+ENTRYPOINT ["/entrypoint.sh"]
